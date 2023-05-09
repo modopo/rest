@@ -41,7 +41,7 @@ class App extends React.Component {
         <div>URL: {this.state.requestParams.url}</div>
         <Form handleApiCall={this.callApi} />
         <Results data={this.state.data} />
-        <Footer />
+        <Footer year='2023'/>
       </React.Fragment>
     );
   }
