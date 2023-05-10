@@ -16,11 +16,15 @@ import Results from './Components/Results';
 function App() {
 
   const [data, setData] = useState(null);
-  const [requestParam, setRequestParam] = useState({ url: '', method: 'GET', data: {} });
+  const [requestParam, setRequestParam] = useState({ url: 'https://pokeapi.co/api/v2/pokemon', method: 'GET', data: {} });
 
   const callApi = async (requestParam) => {
-    setRequestParam(requestParam);
-    setData(await axios(requestParam));
+    try {
+      setData(await axios(requestParam));
+      setRequestParam(requestParam);
+    } catch (err) {
+      setData(err);
+    }
   }
 
   return (
