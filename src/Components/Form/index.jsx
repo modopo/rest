@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import "./Form.scss";
 
-function Form({ handleApiCall }) {
+function Form({ getParams }) {
 
   const [method, setMethod] = useState("get");
   const [url, setUrl] = useState("");
@@ -14,9 +14,9 @@ function Form({ handleApiCall }) {
     const formData = {
       method: method,
       url: url,
-      data: {},
+      body: requestBody,
     }
-    handleApiCall(formData);
+    getParams(formData);
   }
 
   const handleRequestBody = (e) => {
@@ -31,11 +31,13 @@ function Form({ handleApiCall }) {
           <input
             name="url"
             type="text"
+            data-testid='url-test'
             onChange={e => setUrl(e.target.value)} />
           <button type="submit">GO!</button>
         </label>
         <label
           className="methods"
+          data-testid='method-test'
           onClick={e => setMethod(e.target.id)}
         >
           <span id="get" style={{ background: method === "get" ? "#a8dadc" : "#e63946" }}>GET</span>

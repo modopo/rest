@@ -1,13 +1,9 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import './App.scss';
 
-// Let's talk about using index.js and some other name in the component folder.
-// There's pros and cons for each way of doing this...
-// OFFICIALLY, we have chosen to use the Airbnb style guide naming convention. 
-// Why is this source of truth beneficial when spread across a global organization?
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Form from './Components/Form';
@@ -18,13 +14,26 @@ function App() {
   const [data, setData] = useState(null);
   const [requestParam, setRequestParam] = useState({ url: 'https://pokeapi.co/api/v2/pokemon', method: 'GET', data: {} });
 
+  useEffect(() => {
+    callApi(requestParam);
+  }, [requestParam]);
+
   const callApi = async (requestParam) => {
     try {
-      setData(await axios(requestParam));
-      setRequestParam(requestParam);
-    } catch (err) {
-      setData(err);
+      const request = await axios(requestParam);
+      setData({
+        headers: request.headers,
+        body: request.body,
+        status: request.status,
+        data: request.data,
+      })
+    } catch(e) {
+      setData(e);
     }
+  }
+
+  const getParams = (requestParam) => {
+    setRequestParam(requestParam);
   }
 
   return (
@@ -32,7 +41,7 @@ function App() {
       <Header />
       <div>Request Method: {requestParam.method}</div>
       <div>URL: {requestParam.url}</div>
-      <Form handleApiCall={callApi} />
+      <Form getParams={getParams}/>
       <Results data={data} />
       <Footer year='2023' />
     </React.Fragment>

@@ -11,6 +11,10 @@ form {
     display: flex;
     margin: 1rem 0;
 
+    input {
+      width: 50%;
+    }
+
     &.methods {
       span {
         cursor: pointer;
