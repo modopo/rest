@@ -2,8 +2,8 @@ import Results from '.';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
-describe('Testing the Header component', () => {
-  xtest('Should render a result', () => {
+describe('Testing the History component', () => {
+  xtest('Should render history buttons', () => {
     const data = {
       count: 2,
       results: [

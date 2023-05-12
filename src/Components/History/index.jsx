@@ -1,6 +1,6 @@
 import React from 'react';
-import JSONPretty from 'react-json-pretty';
-import 'react-json-pretty/themes/acai.css';
+import JsonView from 'react18-json-view'
+import 'react18-json-view/src/style.css'
 import { useState } from 'react';
 
 function History(data) {
@@ -28,11 +28,11 @@ function History(data) {
                 <div className="accordion-content">
                   <div>
                     Request Parameters
-                    {<JSONPretty data={item.requestParam} ></JSONPretty>}
+                    {<JsonView src={item.requestParam} ></JsonView>}
                   </div>
                   <div>
                     Data:
-                    {<JSONPretty data={item.data.data} ></JSONPretty>}
+                    {<JsonView src={item.data.data} ></JsonView>}
                   </div>
                 </div>
               )}
