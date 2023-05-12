@@ -1,13 +1,19 @@
 import React from 'react';
-import JSONPretty from 'react-json-pretty';
-import 'react-json-pretty/themes/acai.css';
+import JsonView from 'react18-json-view'
+import 'react18-json-view/src/style.css'
 
 function Results(props) {
   return (
-    <section>
-      <pre>
-        {props.data && <JSONPretty data={props.data} ></JSONPretty>}
-      </pre>
+    <section className='results'>
+      <h3>Results</h3>
+      <div>
+        Header:
+        {props.data && <JsonView src={props.data.headers} ></JsonView>}
+      </div>
+      <div>
+        Data:
+        {props.data && <JsonView src={props.data.data} ></JsonView>}
+      </div>
     </section>
   )
 }
